@@ -1,15 +1,26 @@
 use anchor_lang::prelude::*;
 
+mod state;
+mod constants;
+mod instructions;
+
 declare_id!("HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K");
 
 #[program]
 pub mod crowdsale {
+    pub use super::instructions::*;
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        Ok(())
+    // constructor
+    pub fn initialize(ctx: Context<CreateCrowdsale>,id: Pubkey, cost: u32) -> Result<()> {
+        instructions::create_crowdsale(ctx, id, cost)
     }
+
+    // where a user will buy a token
+
+    // where the owner can withdraw Sol
+
+
 }
 
 #[derive(Accounts)]
