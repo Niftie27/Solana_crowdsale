@@ -15,11 +15,12 @@ pub struct Crowdsale {
     pub owner: Pubkey,
 }
 
-#[derive(AnchorSerialze, AnchorDeserialize, Clone, ParialEq, Eq)]
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
 pub enum CrowdsaleStatus {
-    Open, Closed,
+    Open,
+    Closed,
 }
 
-imp1 Crowdsale {
-    pub const MAXIMUM_SIZE: usize = 32 + 4 + 32 + 1 + 32;
+impl Crowdsale {
+    pub const MAXIMUM_SIZE: usize = 32 + 4 + 32 + 32 + 1 + 32;
 }

@@ -6,7 +6,7 @@ pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
   let balance = ctx.accounts.crowdsale.get_lamports();
 
   // Get the minimum rent
-  let rent = RENT::get()?.minimum_balance(Crowdsale::MAXIMUM_SIZE + 8);
+  let rent = Rent::get()?.minimum_balance(Crowdsale::MAXIMUM_SIZE + 8);
 
   // Calculate current balance - rent
   let amount = balance - rent;
@@ -27,7 +27,7 @@ pub struct Withdraw<'info> {
   #[account(
     mut,
     seeds = [
-      crowdsaleid.as_ref()
+      crowdsale.id.as_ref()
     ],
     bump,
   )]

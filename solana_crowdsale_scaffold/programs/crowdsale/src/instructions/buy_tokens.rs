@@ -4,7 +4,7 @@ use {
         associated_token::AssociatedToken,
         token::{transfer, Mint, Token, TokenAccount, Transfer},
     },
-    solana_program::system_instruction,
+    anchor_lang::solana_program::system_instruction,
 };
 
 use crate::{
@@ -12,7 +12,7 @@ use crate::{
     state::Crowdsale
 };
 
-buy fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
+pub fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
   // Calculate how much Sol needed in order to buy x amount of tokens
   // amount of tokens * cost of 1 token
   let amount_of_lamports = (amount * ctx.accounts.crowdsale.cost) as u64;
@@ -20,7 +20,7 @@ buy fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
   let from = &ctx.accounts.buyer;
   let to = &ctx.accounts.crowdsale; // talking to crowdsale state
 
-  let transfer_instruction = system_instructions::transfer(&from.key(), & &ctx.accounts.crowdsale;.key(), amount_of_lamports);
+  let transfer_instruction = system_instruction::transfer(&from.key(), &to.key(), amount_of_lamports);
 
   anchor_lang::solana_program::program::invoke_signed(
     &transfer_instruction,
@@ -45,7 +45,7 @@ buy fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
       ctx.accounts.token_program.to_account_info(),
       Transfer {
         from :ctx.accounts.crowdsale_token_account.to_account_info(),
-        to: ctx:accounts.buyer_token_account.to_account_info(),
+        to: ctx.accounts.buyer_token_account.to_account_info(),
         authority: ctx.accounts.crowdsale_authority.to_account_info(),
       },
       signer_seeds,
@@ -97,8 +97,10 @@ pub struct BuyTokens<'info> {
         ],
         bump,
     )]
-    pub crowdsale_authority: AccountInfo<'info>, // Crowdsale authority
 
+    /// CHECK: This is the PDA authority for the crowdsale token vault.
+    /// It is validated by the seeds+bump above and is only used as a signing authority in CPI.
+    pub crowdsale_authority: AccountInfo<'info>, // Crowdsale authority
     pub mint_account: Account<'info, Mint>, // Token mint account
 
     pub token_program: Program<'info, Token>, // Token Program

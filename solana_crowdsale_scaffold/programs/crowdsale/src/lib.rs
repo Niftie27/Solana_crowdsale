@@ -4,7 +4,7 @@ mod state;
 mod constants;
 mod instructions;
 
-declare_id!("HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K");
+declare_id!("8RZFty5xWXuAMaLKWpbctPgaG8E6wHRFc4pjR4ydqRmr");
 
 #[program]
 pub mod crowdsale {
@@ -18,7 +18,7 @@ pub mod crowdsale {
 
     // where a user will buy a token
 
-    pub fn buy_tokens(ctx: Context<BuyToken>, amount: u32) -> Result<()> {
+    pub fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
         instructions::buy_tokens(ctx, amount)
 
     }

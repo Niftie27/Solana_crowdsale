@@ -18,9 +18,9 @@ pub fn create_crowdsale(ctx: Context<CreateCrowdsale>, id: Pubkey, cost: u32) ->
     crowdsale.mint_account = ctx.accounts.mint_account.key();
     crowdsale.token_account = ctx.accounts.token_account.key();
     crowdsale.status = CrowdsaleStatus::Open;
-    crowdsale.owner = ctx.accounts.owner.key();
+    crowdsale.owner = ctx.accounts.creator.key();
 
-    msg!("Crowdsale created!")
+    msg!("Crowdsale created!");
 
     Ok(())
 

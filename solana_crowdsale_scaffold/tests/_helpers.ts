@@ -1,5 +1,5 @@
 import { type Connection, Keypair, type Signer, Transaction, SystemProgram, sendAndConfirmTransaction } from '@solana/web3.js'
-import { createMint, mintTo } from 'solana/spi-token'
+import { createMint, mintTo } from '@solana/spl-token'
 
 /*
   Check out SPL token docs:
@@ -13,7 +13,7 @@ export async function createMintAccount({
     decimals = 9
   } : {
     connection: Connection,
-    creator? SIGNATURE_LENGTH_IN_BYTES,
+    creator: Signer,
     decimals?: number
   }) {
     // generate a Keypair for Mint account
@@ -30,7 +30,7 @@ export async function createMintAccount({
 
     const mintId = mint.toBase58()
 
-    console.log(`Created Mint Account: ${mintID}`)
+    console.log(`Created Mint Account: ${mintId}`)
 
     return mintKeypair
 

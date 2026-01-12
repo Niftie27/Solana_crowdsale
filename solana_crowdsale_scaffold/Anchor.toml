@@ -1,20 +1,21 @@
 [toolchain]
+anchor_version = "0.32.1"
 
 [features]
 resolution = true
 skip-lint = false
 
 [programs.devnet]
-crowdsale = "HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K"
+crowdsale = "8RZFty5xWXuAMaLKWpbctPgaG8E6wHRFc4pjR4ydqRmr"
 
 [programs.localnet]
-crowdsale = "HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K"
+crowdsale = "8RZFty5xWXuAMaLKWpbctPgaG8E6wHRFc4pjR4ydqRmr"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
