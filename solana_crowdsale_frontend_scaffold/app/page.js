@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js"
 import { getAssociatedTokenAddressSync } from "@solana/spl-token"
 import { AnchorProvider, Program } from "@coral-xyz/anchor"
@@ -11,6 +11,7 @@ import Crowdsale from "@/app/idl/crowdsale.json"
 
 // Import components
 import Header from "./components/Header"
+import Buy from "./components/Buy"
 import Analytics from "./components/Analytics"
 
 
@@ -98,21 +99,29 @@ export default function Home() {
     setCrowdsaleTokenBalance(crowdsaleTokenBalance.value.amount)
   }
 
-
-
   useEffect(() => {
     getProvider()
   }, [])
-
 
   return (
     <div className="page">
       <Header provider={provider} user={user} setUser={setUser} />
       <main className="main">
         <div className="hero">
-          <h1>Introducing sTANG</h1>
+          <h1>Introducing sDAPP</h1>
           <p>Join our community today!</p>
         </div>
+
+        <Buy
+          crowdsaleCost={crowdsaleCost}
+          crowdsaleProgram={crowdsaleProgram}
+          user={user}
+          provider={provider}
+          anchorProvider={anchorProvider}
+          getUserBalance={getUserBalance}
+          getCrowdsaleBalance={getCrowdsaleBalance}
+        />
+
         <Analytics
           userBalance={userBalance}
           userTokenBalance={userTokenBalance}
