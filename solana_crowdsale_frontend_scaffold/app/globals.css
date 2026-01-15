@@ -35,7 +35,7 @@ body {
 
 /* --- UNIVERSAL STYLES --- */
 
-/* Invidiual Elements */
+/* Individual Elements */
 
 a {
   color: inherit;
@@ -94,10 +94,11 @@ a {
   grid-row: 2;
   grid-column: 3 / span 8;
 
-  display: grid;
+  display: grid; 
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   gap: 2em 1em;
   place-items: center;
+  
 }
 
 .hero {
@@ -105,4 +106,87 @@ a {
   grid-column: 1 / -1;
   justify-content: center;
   text-align: center;
+}
+
+.buy,
+.analytics {
+  width: 100%;
+  min-height: 400px;
+
+  background-color: var(--blue);
+  padding: 2em;
+
+  border: 1px solid var(--white);
+  border-radius: 12px;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto 1fr;
+
+  /* centered */
+  grid-column: 1 / -1; 
+  justify-self: center;
+}
+
+.buy h2,
+.analytics h2 {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+  letter-spacing: -1px;
+}
+
+/* --- MAIN FORM STYLES */
+
+.buy form {
+  grid-row: 2;
+  grid-column: 3 / 11;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.buy form input[type="number"] {
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 6px;
+
+  width: 200px;
+  height: 50px;
+  padding: 1em;
+}
+
+.buy p {
+  grid-row: 3;
+  grid-column: 3 / 9;
+}
+
+/* --- MAIN ANALYTICS STYLES --- */
+
+.analytics {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 2em;
+}
+
+.analytics__program,
+.analytics__user {
+  grid-column: 3 / 11;
+
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+}
+
+.analytics__program h4,
+.analytics__user h4 {
+  font-weight: 300;
+}
+
+.analytics__program p,
+.analytics__user p {
+  font-weight: 700;
 }

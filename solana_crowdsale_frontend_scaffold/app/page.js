@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js"
 import { getAssociatedTokenAddressSync } from "@solana/spl-token"
 import { AnchorProvider, Program } from "@coral-xyz/anchor"
+const { LAMPORTS_PER_SOL } = require('@solana/web3.js');
 
 // Import config & IDL
 import config from "@/app/config.json"
@@ -10,6 +11,7 @@ import Crowdsale from "@/app/idl/crowdsale.json"
 
 // Import components
 import Header from "./components/Header"
+import Analytics from "./components/Analytics"
 
 
 export default function Home() {
@@ -61,7 +63,7 @@ export default function Home() {
     }
   }
 
-  const getUserBalance = async () => {
+  const getUserBalance = async (anchorProvider) => {
     // Setup public keys
     const userPublicKey = new PublicKey(anchorProvider.wallet)
     const tokenPublicKey = new PublicKey(config.TOKEN_MINT_ACCOUNT)
@@ -73,7 +75,7 @@ export default function Home() {
     // Get user's Token balance
     // Since the user might have 0, we need to get their account info
     const userTokenAccount = getAssociatedTokenAddressSync(tokenPublicKey, userPublicKey, true)
-    const userTokenAccountInfo = await anchorProvider.connection.getAccountInfo(userTokenAccount)¨
+    const userTokenAccountInfo = await anchorProvider.connection.getAccountInfo(userTokenAccount)
 
     // If they have never had a balance, their account info will be null
     if (userTokenAccountInfo) {
@@ -111,6 +113,12 @@ export default function Home() {
           <h1>Introducing sTANG</h1>
           <p>Join our community today!</p>
         </div>
+        <Analytics
+          userBalance={userBalance}
+          userTokenBalance={userTokenBalance}
+          crowdsaleBalance={crowdsaleBalance}
+          crowdsaleTokenBalance={crowdsaleTokenBalance}
+        />
       </main >
     </div >
   );

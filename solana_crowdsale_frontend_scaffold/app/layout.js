@@ -8,7 +8,7 @@ export const jura = Jura({
 
 export const metadata = {
   title: "Solana Crowdsale",
-  description: "Fundraiser for sDAPP",
+  description: "Fundraiser for sTANG",
 }
 
 export default function RootLayout({ children }) {
