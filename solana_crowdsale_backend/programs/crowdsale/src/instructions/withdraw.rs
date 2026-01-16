@@ -8,6 +8,10 @@ pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
   // Get the minimum rent
   let rent = Rent::get()?.minimum_balance(Crowdsale::MAXIMUM_SIZE + 8);
 
+  if balance <= rent {
+    return err!(WithdrawError::InsufficientBalance);
+  }
+
   // Calculate current balance - rent
   let amount = balance - rent;
 
@@ -34,4 +38,10 @@ pub struct Withdraw<'info> {
   pub crowdsale: Account<'info, Crowdsale>,
 
   pub system_program: Program<'info, System>,
+}
+
+#[error_code]
+pub enum WithdrawError {
+  #[msg("Insufficient balance to withdraw after rent")]
+  InsufficientBalance,
 }
