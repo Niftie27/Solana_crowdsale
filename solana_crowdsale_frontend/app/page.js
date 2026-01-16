@@ -109,7 +109,7 @@ export default function Home() {
       <Header provider={provider} user={user} setUser={setUser} />
       <main className="main">
         <div className="hero">
-          <h1>Introducing sDAPP</h1>
+          <h1>Introducing sTANG</h1>
           <p>Join our community today!</p>
         </div>
 
