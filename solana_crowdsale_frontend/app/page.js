@@ -12,6 +12,7 @@ import Crowdsale from "@/app/idl/crowdsale.json"
 // Import components
 import Header from "./components/Header"
 import Buy from "./components/Buy"
+import Withdraw from "./components/Withdraw"
 import Analytics from "./components/Analytics"
 
 
@@ -114,6 +115,16 @@ export default function Home() {
 
         <Buy
           crowdsaleCost={crowdsaleCost}
+          crowdsaleProgram={crowdsaleProgram}
+          user={user}
+          provider={provider}
+          anchorProvider={anchorProvider}
+          getUserBalance={getUserBalance}
+          getCrowdsaleBalance={getCrowdsaleBalance}
+
+        />
+
+        <Withdraw
           crowdsaleProgram={crowdsaleProgram}
           user={user}
           provider={provider}
