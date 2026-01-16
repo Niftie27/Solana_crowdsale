@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "URL=http://localhost:3000 && (open $URL || cmd.exe /c start $URL) && next dev",
+    "open": "node -e \"const u='http://localhost:3000'; (process.platform==='win32'?require('child_process').exec('start '+u):require('child_process').exec('xdg-open '+u+' || open '+u));\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
